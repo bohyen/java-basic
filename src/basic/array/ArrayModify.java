@@ -24,6 +24,7 @@ public class ArrayModify {
         for (int i = 0; i < foods.length; i++) {
             if (name.equals(foods[i])) {
                 System.out.println("탐색 완료! 인덱스: " + i);
+                flag = true;
                 break;
             }
         }
