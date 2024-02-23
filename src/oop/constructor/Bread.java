@@ -12,10 +12,10 @@ public class Bread {
     // 매개값을 받는 여러 생성자를 이용할 수도 있지만, 기본 형태로 생성되어야 할 일도 있기 때문.
     Bread() {}
 
-    Bread(String bName, int bPrice, String bIngredient) {
-        name = bName;
-        price = bPrice;
-        ingredient = bIngredient;
+    public Bread(String name, int price, String ingredient) {
+        this.name = name;
+        this.price = price;
+        this.ingredient = ingredient;
     }
 
     void info() {
