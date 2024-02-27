@@ -13,5 +13,85 @@ public class Score {
 	 - 캡슐화를 구현해서 작성해 주세요. (생성자는 맘대로 하세요.)
 	*/
 
+    private String name;
+    private int kor;
+    private int eng;
+    private int math;
+    private int total;
+    private double average;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getKor() {
+        return kor;
+    }
+
+    public void setKor(int kor) {
+        this.kor = kor;
+    }
+
+    public int getEng() {
+        return eng;
+    }
+
+    public void setEng(int eng) {
+        this.eng = eng;
+    }
+
+    public int getMath() {
+        return math;
+    }
+
+    public void setMath(int math) {
+        this.math = math;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    /*
+    public void setTotal() {
+        // 이미 kor, eng, math가 세팅이 완료되었다고 가정.
+        this.total = this.kor + this.eng + this.math;
+    }
+    */
+
+    public double getAverage() {
+        return average;
+    }
+
+    /*
+    public void setAverage() {
+        this.average = this.total / 3.0;
+    }
+    */
+
+    // 총점과 평균을 한번에 계산해서 세팅하는 메서드
+    public void setTotalAndAvg() {
+        this.total = this.kor + this.eng + this.math;
+        this.average = this.total / 3.0;
+    }
+
+    public void scoreInfo() {
+        System.out.printf("이름: %s  국어: %d점  영어: %d점  수학: %d점\n총점: %d점  평균: %.2f점\n"
+                , name, kor, eng, math, total, average);
+    }
+
+    // 점수 유효성 검증
+    public boolean isValidateScore(int score) {
+        if(score > 100 || score < 0) {
+            System.out.println("유효하지 않은 점수입니다. (0 ~ 100)");
+            return false;
+        }
+        return true;
+    }
+
 
 }
