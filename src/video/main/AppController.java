@@ -1,6 +1,7 @@
 package video.main;
 
 import video.common.AppService;
+import video.movie.service.MovieService;
 import video.user.service.UserService;
 
 public class AppController {
@@ -17,7 +18,7 @@ public class AppController {
 
                 break;
             case 3:
-
+                service = new MovieService();
                 break;
             case 4:
                 System.out.println("# 프로그램을 종료합니다.");

@@ -49,6 +49,15 @@ public class AppUi {
         makeLine();
     }
 
+    // 영화 관리 시스템 화면 출력
+    public static void movieManagementScreen() {
+        System.out.println("\n========= 영화 DVD 관리 시스템 =========");
+        System.out.println("### 1. 신규 영화 DVD 추가");
+        System.out.println("### 2. 영화 DVD 정보 검색");
+        System.out.println("### 3. 첫 화면으로 가기");
+        makeLine();
+    }
+
 
 
 
