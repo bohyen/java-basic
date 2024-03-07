@@ -1,9 +1,14 @@
 package video.movie.repository;
 
+import video.common.Condition;
 import video.movie.domain.Movie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static video.common.Condition.*;
 
 public class MovieRepository {
 
@@ -41,5 +46,67 @@ public class MovieRepository {
     public void addMovie(Movie movie) {
         movieDatabase.put(movie.getSerialNumber(), movie);
     }
+
+    public List<Movie> searchMovieList(Condition condition, String keyword) throws Exception {
+        if (condition == PUB_YEAR) {
+            return searchByPubYear(keyword);
+        } else if (condition == NATION) {
+            return searchByNation(keyword);
+        } else if (condition == TITLE) {
+            return searchByTitle(keyword);
+        } else {
+            return searchAll();
+        }
+    }
+
+    private List<Movie> searchAll() {
+        List<Movie> searchedList = new ArrayList<>();
+        for (int key : movieDatabase.keySet()) {
+            Movie movie = movieDatabase.get(key);
+            searchedList.add(movie);
+        }
+        return searchedList;
+    }
+
+    // 문자열을 숫자로 변환하는 과정에서 예외 발생 가능성이 있기 때문에 throws 추가.
+    private List<Movie> searchByPubYear(String keyword) throws NumberFormatException {
+        List<Movie> searchedList = new ArrayList<>();
+
+        // 입력값을 String으로 받았기 때문에 int로 변환해서 비교
+        int targetYear = Integer.parseInt(keyword);
+
+        for (int key : movieDatabase.keySet()) {
+            Movie movie = movieDatabase.get(key);
+            if (movie.getPubYear() == targetYear) {
+                searchedList.add(movie);
+            }
+        }
+        return searchedList;
+    }
+
+    private List<Movie> searchByNation(String keyword) {
+        List<Movie> searchedList = new ArrayList<>();
+
+        for (int key : movieDatabase.keySet()) {
+            Movie movie = movieDatabase.get(key);
+            if (movie.getNation().equals(keyword)) {
+                searchedList.add(movie);
+            }
+        }
+        return searchedList;
+    }
+
+    private List<Movie> searchByTitle(String keyword) {
+        List<Movie> searchedList = new ArrayList<>();
+
+        for (int key : movieDatabase.keySet()) {
+            Movie movie = movieDatabase.get(key);
+            if (movie.getMovieName().equals(keyword)) {
+                searchedList.add(movie);
+            }
+        }
+        return searchedList;
+    }
+
 
 }

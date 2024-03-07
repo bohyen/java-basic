@@ -55,11 +55,27 @@ public class MovieService implements AppService {
 
     // 영화 검색 정보 출력
     private void showSearchMovieData() {
-        searchMovieData();
+
+        try {
+            List<Movie> movies = searchMovieData();
+            int count = movies.size();
+            if(count > 0) {
+                System.out.printf("\n======================================= 검색 결과(총 %d건) =======================================\n", count);
+                for (Movie movie : movies) {
+                    System.out.println(movie);
+                }
+            } else {
+                System.out.println("\n### 검색 결과가 없습니다.");
+            }
+        } catch (Exception e) {
+            System.out.println("\n ### 발행연도는 정수로만 입력하세요.");
+        }
+
+
     }
 
     // 영화 검색 비즈니스 로직
-    private List<Movie> searchMovieData() {
+    private List<Movie> searchMovieData() throws Exception {
         System.out.println("\n============== 영화 DVD 검색 조건을 선택하세요. ===============");
         System.out.println("[ 1. 제목검색 | 2. 국가검색 | 3. 발매연도검색 | 4. 전체검색 ]");
         int selection = inputInteger(">>> ");
@@ -86,6 +102,12 @@ public class MovieService implements AppService {
                 System.out.println("\n### 해당 메뉴가 존재하지 않습니다. 전체 정보로 검색합니다.");
         }
 
+        String keyword = "";
+        if (condition != Condition.ALL) {
+            keyword = inputString("# 검색어: ");
+        }
+
+        return movieRepository.searchMovieList(condition, keyword);
     }
 
 
