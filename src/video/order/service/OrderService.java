@@ -136,7 +136,7 @@ public class OrderService implements AppService {
                 System.out.println("\n### 검색된 회원의 번호를 입력하세요.");
             }
 
-        } else {
+        } else { //
             System.out.println("\n### 대여자 정보가 없습니다.");
         }
 
