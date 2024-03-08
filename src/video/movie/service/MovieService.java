@@ -6,6 +6,7 @@ import video.movie.domain.Movie;
 import video.movie.repository.MovieRepository;
 import video.ui.AppUi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static video.ui.AppUi.*;
@@ -29,6 +30,9 @@ public class MovieService implements AppService {
                     showSearchMovieData();
                     break;
                 case 3:
+                    deleteMovieData();
+                    break;
+                case 4:
                     return;
                 default:
                     System.out.println("### 메뉴를 다시 입력하세요.");
@@ -109,6 +113,38 @@ public class MovieService implements AppService {
 
         return movieRepository.searchMovieList(condition, keyword);
     }
+
+    // 기존 등록 영화 삭제 기능
+    private void deleteMovieData() {
+        try {
+            System.out.println("\n### 삭제를 위한 영화 검색을 시작합니다.");
+            List<Movie> movies = searchMovieData();
+
+            if (movies.size() > 0) {
+                List<Integer> movieNums = new ArrayList<>();
+                for (Movie movie : movies) {
+                    System.out.println(movie);
+                    movieNums.add(movie.getSerialNumber());
+                }
+                System.out.println("\n### 삭제할 영화의 번호를 입력하세요.");
+                int delMovieNum = inputInteger(">>> ");
+
+                if (movieNums.contains(delMovieNum)) {
+                    Movie delMovie = movieRepository.deleteMovie(delMovieNum);
+                    System.out.printf("\n### 영화번호: %d -> %s 영화의 정보를 정상 삭제하였습니다.\n"
+                            , delMovie.getSerialNumber(), delMovie.getMovieName());
+                } else {
+                    System.out.println("\n### 검색된 영화 번호로만 삭제가 가능합니다.");
+                }
+
+            } else {
+                System.out.println("\n### 조회 결과가 없습니다.");
+            }
+        } catch (Exception e) {
+            System.out.println("\n ### 발행연도는 정수로만 입력하세요.");
+        }
+    }
+
 
 
 }

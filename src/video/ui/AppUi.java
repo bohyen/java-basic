@@ -9,7 +9,7 @@ public class AppUi {
 
     public static String inputString(String message) {
         System.out.print(message);
-        return sc.nextLine();
+        return sc.nextLine(); //
     }
 
     public static int inputInteger(String message) {
@@ -54,11 +54,19 @@ public class AppUi {
         System.out.println("\n========= 영화 DVD 관리 시스템 =========");
         System.out.println("### 1. 신규 영화 DVD 추가");
         System.out.println("### 2. 영화 DVD 정보 검색");
-        System.out.println("### 3. 첫 화면으로 가기");
+        System.out.println("### 3. 영화 DVD 삭제");
+        System.out.println("### 4. 첫 화면으로 가기");
         makeLine();
     }
 
-
+    //대여 주문 관리 시스템 화면 출력
+    public static void orderManagementScreen() {
+        System.out.println("\n========= 대여 주문 관리 시스템 =========");
+        System.out.println("### 1. 영화 DVD 대여하기");
+        System.out.println("### 2. 영화 DVD 반납하기");
+        System.out.println("### 3. 첫 화면으로 가기");
+        makeLine();
+    }
 
 
 }
